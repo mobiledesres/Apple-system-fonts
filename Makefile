@@ -19,7 +19,7 @@ endif
 $(fonts)/%: $(dmg)/%.dmg
 	bash $(extract_exec) "$<" "$@"
 
-# This target to ensure that the .dmg files are there
+# This target is used to ensure that the .dmg files are there
 # Otherwise they will be re-downloaded
 .PHONY: dmg
 dmg:
