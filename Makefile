@@ -4,6 +4,8 @@ dmg_files := $(shell find $(dmg)/ -name *.dmg)
 img := img
 img_files := $(foreach dmg_file,$(dmg_files),$(img)/$(basename $(notdir $(dmg_file))).img)
 
+fonts := fonts
+
 
 .PHONY: all
 all: $(img)
@@ -28,4 +30,4 @@ $(img)/%.img: $(dmg)/%.dmg
 
 .PHONY: clean
 clean:
-	-rm -rfv $(img)/
+	-rm -rfv $(img)/ $(fonts)/
