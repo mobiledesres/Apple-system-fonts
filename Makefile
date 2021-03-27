@@ -23,9 +23,8 @@ dmg:
 
 # Convert .dmg files to .img files
 $(img)/%.img: $(dmg)/%.dmg
-	@mkdir -p $(img)
+	mkdir -p $(img)
 	dmg2img $< $@
-
 
 .PHONY: clean
 clean:
