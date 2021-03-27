@@ -7,7 +7,7 @@ all: get_fonts
 # main page: https://developer.apple.com/fonts/
 .PHONY: get_fonts
 get_fonts:
-	wget -i $(source) -N
+	cat $(source) | xargs -n 1 -P 4 wget -N -q --show-progress
 
 .PHONY: clean
 clean:
