@@ -8,11 +8,12 @@ fi
 
 fonts_dir="fonts"
 
+# extract fonts from a .dmg file
+# Usage: extract_fonts_from_dmg "<.dmg_file_to_extract>"
 function extract_fonts_from_dmg {
   # 1. create target directory for fonts
   local dmg_file="$1"
-  local basename="$(basename ""$dmg_file"")"
-  local basename="${basename%.*}"
+  local basename="$(basename ""${dmg_file.%}"")"
   local target_dir="$fonts_dir/$basename"
   mkdir -pv "$target_dir"
 
