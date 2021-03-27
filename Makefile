@@ -11,6 +11,9 @@ all: $(img)
 
 .PHONY: img
 img: dmg $(img_files)
+ifndef img_files
+	$(MAKE) img
+endif
 
 # This target to ensure that the .dmg files are there
 # Otherwise they will be re-downloaded
