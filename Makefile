@@ -10,7 +10,7 @@ all: $(img)
 .PHONY: img
 img: $(img_files)
 
-img/%.img: dmg/%.dmg
+$(img)/%.img: $(dmg)/%.dmg
 	@mkdir -p $(img)
 	dmg2img $< $@
 
