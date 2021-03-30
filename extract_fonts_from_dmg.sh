@@ -33,8 +33,7 @@ function extract_fonts_from_dmg {
   local payload="Payload~"
   find "$tempdir" -name "$payload" -exec 7z x -O"$tempdir" {} ";"
 
-  # 7. go back to current directory
-  # move all .otf and .ttf files to target directory
+  # 7. move all .otf and .ttf files to target directory
   find "$tempdir" -name "*.[ot]tf" -exec mv -v {} "$extract_dir" ";"
 
   # 8. clean up temporary directory
