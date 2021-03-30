@@ -15,7 +15,7 @@ function extract_fonts_from_dmg {
   mkdir -pv "$extract_dir"
 
   # 2. create temporary directory to extract files
-  local tempdir=$(mktemp -d)
+  local tempdir="$(mktemp -d)"
 
   # 3. convert .dmg to .img, and put int in temporary directory
   local dmg_file="$1"
@@ -26,19 +26,16 @@ function extract_fonts_from_dmg {
   # 4. extract .img to temporary directory
   7z x "$img_file" -O"$tempdir"
 
-  # 5. change to temporary directory
-  # extract the .pkg file there
-  pushd "$tempdir"
-  find . -name *.pkg -exec 7z x {} ";"
+  # 5. extract the .pkg file in the temporary directory
+  find "$tempdir" -name "*.pkg" -exec 7z x -O"$tempdir" {} ";"
 
-  # 6. extract Payload~
+  # 6. extract the "Payload~" file
   local payload="Payload~"
-  find . -name "$payload" -exec 7z x {} ";"
+  find "$tempdir" -name "$payload" -exec 7z x -O"$tempdir" {} ";"
 
   # 7. go back to current directory
   # move all .otf and .ttf files to target directory
-  popd
-  find "$tempdir" -name "*.[ot]tf" -exec mv {} "$extract_dir" ";"
+  find "$tempdir" -name "*.[ot]tf" -exec mv -v {} "$extract_dir" ";"
 
   # 8. clean up temporary directory
   rm -rf "$tempdir"
