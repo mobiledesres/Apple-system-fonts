@@ -6,3 +6,23 @@ The available fonts are:
 * SF Compact
 * SF Mono
 * New York
+
+## Extract fonts
+* Extract all fonts:
+    ```shell
+    make
+    ```
+* Extract and pack all fonts into `fonts.zip`:
+    ```shell
+    make zip
+    ```
+
+## Clean up
+* Clean up generated fonts:
+    ```shell
+    make clean
+    ```
+* Clean up the generated `fonts.zip` file:
+    ```shell
+    make rmzip
+    ```
