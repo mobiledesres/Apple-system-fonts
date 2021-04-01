@@ -4,6 +4,8 @@ dmg_files := $(shell find $(dmg)/ -name *.dmg)
 fonts := fonts
 fonts_dirs := $(foreach dmg_file,$(dmg_files),$(fonts)/$(basename $(notdir $(dmg_file))))
 
+zip := fonts.zip
+
 extract_exec := extract_fonts_from_dmg.sh
 
 
@@ -28,6 +30,17 @@ dmg:
 ifndef dmg_files
 	$(MAKE) -C $(dmg)/
 endif
+
+# pack all fonts into a .zip file
+.PHONY: zip
+zip: $(zip)
+
+$(zip): fonts
+	zip -r "$@" "$<"
+
+.PHONY: rmzip
+rmzip:
+	-rm -rfv $(zip)
 
 .PHONY: clean
 clean:
