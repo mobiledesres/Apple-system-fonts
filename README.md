@@ -7,6 +7,11 @@ The available fonts are:
 * SF Mono
 * New York
 
+## Prerequisites
+These packages must be installed:
+* `dmg2img`
+* `p7zip-full`
+
 ## Extract fonts
 * Extract all fonts:
     ```shell
