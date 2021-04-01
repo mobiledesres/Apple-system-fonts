@@ -10,12 +10,14 @@ extract_exec := extract_fonts_from_dmg.sh
 .PHONY: all
 all: fonts
 
+# extract fonts from .dmg
 .PHONY: fonts
 fonts: dmg $(fonts_dirs)
 ifndef fonts_dirs
 	$(MAKE) fonts
 endif
 
+# fonts from each .dmg is extracted into a directory
 $(fonts)/%: $(dmg)/%.dmg
 	bash $(extract_exec) "$<" "$@"
 
