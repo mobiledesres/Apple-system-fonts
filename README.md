@@ -7,6 +7,8 @@ The available fonts are:
 * SF Mono
 * New York
 
+![](fonts-hero-large_2x.png)
+
 ## Prerequisites
 These packages must be installed:
 * `dmg2img`
