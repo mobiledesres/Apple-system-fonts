@@ -1,10 +1,10 @@
-dmg := dmg
-dmg_files := $(shell find $(dmg)/ -name *.dmg)
+dmg_dir := dmg
+url_files := $(shell ls $(dmg_dir)/*.url)
+dmg_files := $(url_files:.url=.dmg)
 
-fonts := fonts
-fonts_dirs := $(foreach dmg_file,$(dmg_files),$(fonts)/$(basename $(notdir $(dmg_file))))
-
-zip := fonts.zip
+fonts_root_dir := fonts
+fonts_dirs := $(patsubst $(dmg_dir)/%.url,$(fonts_root_dir)/%,$(url_files))
+fonts_zip := fonts.zip
 
 extract_exec := extract-fonts.sh
 
@@ -13,34 +13,27 @@ all: fonts
 
 # extract fonts from .dmg
 .PHONY: fonts
-fonts: dmg $(fonts_dirs)
-ifndef fonts_dirs
-	$(MAKE) fonts
-endif
+fonts: $(dmg_files) $(fonts_dirs)
 
-# fonts from each .dmg is extracted into a directory
-$(fonts)/%: $(dmg)/%.dmg
-	bash "$(extract_exec)" "$<" "$@"
+# get each .dmg file
+$(dmg_dir)/%.dmg:
+	$(MAKE) -C "$(dir $@)" "$(notdir $@)"
 
-# This target is used to ensure that the .dmg files are there
-# Otherwise they will be re-downloaded
-.PHONY: dmg
-dmg:
-ifndef dmg_files
-	$(MAKE) -C $(dmg)/
-endif
+# extract fonts from each .dmg into a directory
+$(fonts_root_dir)/%: $(dmg_dir)/%.dmg
+	bash $(extract_exec) "$<" "$@"
 
 # pack all fonts into a .zip file
 .PHONY: zip
-zip: $(zip)
+zip: $(fonts_zip)
 
-$(zip): fonts
+$(fonts_zip): fonts
 	zip -r "$@" "$<"
 
 .PHONY: rmzip
 rmzip:
-	-rm -rfv $(zip)
+	-rm -rfv $(fonts_zip)
 
 .PHONY: clean
-clean:
-	-rm -rfv $(fonts)/
+clean: rmzip
+	-rm -rfv $(fonts_root_dir)/
