@@ -25,7 +25,7 @@ These packages must be installed:
     ```
 
 ## Clean up
-* Clean up generated fonts:
+* Clean up generated fonts (also removes the `fonts.zip` file):
     ```shell
     make clean
     ```
