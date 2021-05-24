@@ -6,7 +6,7 @@ fonts_dirs := $(foreach dmg_file,$(dmg_files),$(fonts)/$(basename $(notdir $(dmg
 
 zip := fonts.zip
 
-extract_exec := extract_fonts_from_dmg.sh
+extract_exec := extract-fonts.sh
 
 
 .PHONY: all
