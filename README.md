@@ -17,11 +17,11 @@ These packages must be installed:
 ## Extract fonts
 * Extract all fonts:
     ```shell
-    make
+    make -j
     ```
 * Extract and pack all fonts into `fonts.zip`:
     ```shell
-    make zip
+    make -j zip
     ```
 
 ## Clean up
