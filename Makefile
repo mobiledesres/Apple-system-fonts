@@ -8,7 +8,6 @@ zip := fonts.zip
 
 extract_exec := extract-fonts.sh
 
-
 .PHONY: all
 all: fonts
 
@@ -21,7 +20,7 @@ endif
 
 # fonts from each .dmg is extracted into a directory
 $(fonts)/%: $(dmg)/%.dmg
-	bash $(extract_exec) "$<" "$@"
+	bash "$(extract_exec)" "$<" "$@"
 
 # This target is used to ensure that the .dmg files are there
 # Otherwise they will be re-downloaded
