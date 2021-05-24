@@ -1,14 +1,14 @@
-source := sources.url
+url_files := $(shell ls *.url)
+dmg_files := $(url_files:.url=.dmg)
 
 .PHONY: all
-all: get_fonts
+all: $(dmg_files)
 
 # get .dmg archives from Apple
 # main page: https://developer.apple.com/fonts/
-.PHONY: get_fonts
-get_fonts:
-	cat $(source) | xargs -n 1 -P 4 wget -N --show-progress
+%.dmg: %.url
+	wget -N -i "$<"
 
 .PHONY: clean
 clean:
-	-rm -rfv *.dmg
+	-rm -rfv $(dmg_files)
