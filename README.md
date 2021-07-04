@@ -5,8 +5,8 @@ The available fonts are:
 * SF Pro
 * SF Compact
 * SF Mono
-* New York
 * SF Arabic (beta)
+* New York
 
 ![](fonts-hero-large_2x.png)
 
