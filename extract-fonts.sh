@@ -7,6 +7,32 @@ fi
 dmgFile="$1"
 extractDir="$2"
 
+# check if both dmg2img and p7zip-full are installed
+function check_utils {
+  i=0
+
+  dmg2img
+  check=$?
+  i=$(expr $i \| $check)
+  if [ $check -ne 0 ]; then
+    echo "ERROR: package \"dmg2img\" is not installed."
+  fi
+  
+  7z
+  check=$?
+  i=$(expr $i \| $check)
+  if [ $check -ne 0 ]; then
+    echo "ERROR: package \"p7zip-full\" is not installed."
+  fi
+  
+  if [ $i -ne 0 ]; then
+    echo "Exiting."
+    exit 1
+  fi
+}
+
+check_utils
+
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
 function extract_fonts {
