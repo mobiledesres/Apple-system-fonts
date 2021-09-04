@@ -1,6 +1,6 @@
 if [ $# -lt 2 ]
 then
-  echo "Usage: bash \"$0\" \"path/to/dmg.dmg\"" "\"extract/dir\""
+  echo "Usage: bash \"$0\" \"path/to/dmg.dmg\"" "\"extract/dir\"" >&2
   exit 1
 fi
 
@@ -9,24 +9,24 @@ extractDir="$2"
 
 # check if both dmg2img and p7zip-full are installed
 function check_utils {
-  i=0
+  local check=0
 
+  # check dmg2img
   dmg2img
-  check=$?
-  i=$(expr $i \| $check)
+  check=$(expr $check \| $?)
   if [ $check -ne 0 ]; then
-    echo "ERROR: package \"dmg2img\" is not installed."
+    echo "ERROR: package \"dmg2img\" is not installed." >&2
   fi
-  
+
+  # check 7z
   7z
-  check=$?
-  i=$(expr $i \| $check)
+  check=$(expr $check \| $?)
   if [ $check -ne 0 ]; then
-    echo "ERROR: package \"p7zip-full\" is not installed."
+    echo "ERROR: package \"p7zip-full\" is not installed." >&2
   fi
-  
-  if [ $i -ne 0 ]; then
-    echo "Exiting."
+
+  if [ $check -ne 0 ]; then
+    echo "Exiting." >&2
     exit 1
   fi
 }
