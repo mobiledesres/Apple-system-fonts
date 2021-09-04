@@ -15,6 +15,11 @@ all: fonts
 .PHONY: fonts
 fonts: $(dmg_files) $(fonts_dirs)
 
+# update all .dmg files
+.PHONY: update
+update:
+	$(MAKE) -C "$(dmg_dir)"
+
 # get each .dmg file
 $(dmg_dir)/%.dmg:
 	$(MAKE) -C "$(dir $@)" "$(notdir $@)"
@@ -30,10 +35,12 @@ zip: $(fonts_zip)
 $(fonts_zip): fonts
 	zip -r "$@" "$<"
 
+# clean up the .zip file
 .PHONY: rmzip
 rmzip:
 	-rm -rfv $(fonts_zip)
 
+# clean up all extracted font files
 .PHONY: clean
 clean: rmzip
 	-rm -rfv $(fonts_root_dir)/

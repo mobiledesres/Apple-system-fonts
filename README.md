@@ -34,3 +34,10 @@ These packages must be installed:
     ```shell
     make rmzip
     ```
+
+# Update .dmg files
+When Apple releases new versions of the system font files, you can run
+```shell
+make update
+```
+to update all .dmg files in the repository.
