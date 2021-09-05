@@ -6,7 +6,7 @@ fonts_root_dir := fonts
 fonts_dirs := $(patsubst $(dmg_dir)/%.url,$(fonts_root_dir)/%,$(url_files))
 fonts_zip := fonts.zip
 
-extract_exec := extract-fonts.sh
+extract_exec := extract_fonts.sh
 
 .PHONY: all
 all: fonts
