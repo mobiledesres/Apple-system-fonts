@@ -1,5 +1,4 @@
 ERROR_ARGS=1
-ERROR_PREREQ=2
 ERROR_RW=-1
 
 if [ $# -lt 2 ]
@@ -11,31 +10,8 @@ fi
 dmgFile="$1"
 extractDir="$2"
 
-# check if both dmg2img and p7zip-full are installed
-function check_prereqs {
-    local check=0
-
-    # check dmg2img
-    dmg2img > /dev/null
-    check=$(expr $check \| $?)
-    if [ $check -ne 0 ]; then
-        echo "ERROR: package \"dmg2img\" is not installed." >&2
-    fi
-
-    # check 7z
-    7z > /dev/null
-    check=$(expr $check \| $?)
-    if [ $check -ne 0 ]; then
-        echo "ERROR: package \"p7zip-full\" is not installed." >&2
-    fi
-
-    if [ $check -ne 0 ]; then
-        echo "Exiting." >&2
-        exit $ERROR_PREREQ
-    fi
-}
-
-check_prereqs
+# check prerequisite packages
+source check_prereqs.sh
 
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
