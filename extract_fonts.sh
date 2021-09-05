@@ -13,23 +13,17 @@ extractDir="$2"
 # check prerequisite packages
 source check_prereqs.sh
 
+# directory utilities
+source dir_utils.sh
+
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
 function extract_fonts {
-    # 1. create target directory for fonts
-    local extractDir="$2"
-    mkdir -pv "$extractDir"
-    if [ $? -ne 0 ]; then
-        echo "ERROR: unable to create extract directory at \"$extractDir\"" >&2
-        exit $ERROR_RW
-    fi
+    # 1. create extract directory for fonts
+    make_extract_dir "$extractDir"
 
     # 2. create temporary directory to extract files
-    local tempDir="$(mktemp -d)"
-    if [ $? -ne 0 ]; then
-        echo "ERROR: unable to create temporary directory at \"$tempDir\"" >&2
-        exit $ERROR_RW
-    fi
+    local tempDir=$(make_temp_dir)
 
     # 3. convert .dmg to .img, and put int in temporary directory
     local dmgFile="$1"
