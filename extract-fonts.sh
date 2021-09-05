@@ -4,7 +4,7 @@ ERROR_RW=-1
 
 if [ $# -lt 2 ]
 then
-    echo "Usage: bash \"$0\" \"path/to/dmg.dmg\"" "\"extract/dir\"" >&2
+    echo "Usage: bash \"$0\" \"<path_to_dmg>\"" "\"<extract_dir>\"" >&2
     exit $ERROR_ARGS
 fi
 
@@ -12,7 +12,7 @@ dmgFile="$1"
 extractDir="$2"
 
 # check if both dmg2img and p7zip-full are installed
-function check_utils {
+function check_prereqs {
     local check=0
 
     # check dmg2img
@@ -35,7 +35,7 @@ function check_utils {
     fi
 }
 
-check_utils
+check_prereqs
 
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
