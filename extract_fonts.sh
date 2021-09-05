@@ -20,6 +20,7 @@ source dir_utils.sh
 # Usage: extract_fonts "$dmgFile" "$extractDir"
 function extract_fonts {
     # 1. create extract directory for fonts
+    local extractDir="$2"
     make_extract_dir "$extractDir"
 
     # 2. create temporary directory to extract files
