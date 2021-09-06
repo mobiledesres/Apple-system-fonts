@@ -35,9 +35,12 @@ These packages must be installed:
     make rmzip
     ```
 
-# Update .dmg files
+## Update .dmg files
 When Apple releases new versions of the system font files, you can run
 ```shell
 make update
 ```
 to update all .dmg files in the repository.
+
+# See also
+* [SF Symbols](https://github.com/mobiledesres/SF-Symbols)
