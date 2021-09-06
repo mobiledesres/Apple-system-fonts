@@ -1,5 +1,3 @@
-source dir_utils.sh
-
 function extract_dmg_to_img {
     local dmgFile="$1"
     local imgFile="$2"
@@ -11,7 +9,7 @@ function extract_fonts_from_img {
     local extractDir="$2"
 
     # 1. extract .img to temporary directory
-    local tempDir=$(make_temp_dir)
+    local tempDir=$(mktemp -d)
     7z x "$imgFile" -O"$tempDir"
 
     # 2. extract the .pkg file in the temporary directory

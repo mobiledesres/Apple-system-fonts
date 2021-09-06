@@ -13,9 +13,6 @@ extractDir="$2"
 # check prerequisite packages
 source check_prereqs.sh
 
-# directory utilities
-source dir_utils.sh
-
 # extract utilities
 source extract_utils.sh
 
@@ -24,10 +21,13 @@ source extract_utils.sh
 function extract_fonts {
     # 1. create extract directory for fonts
     local extractDir="$2"
-    make_extract_dir "$extractDir"
+    mkdir -pv "$extractDir"
+    if [[ $? -ne 0 ]]; then
+        exit $ERROR_RW
+    fi
 
     # 2. create temporary directory to extract files
-    local tempDir=$(make_temp_dir)
+    local tempDir=$(mktemp -d)
 
     # 3. convert .dmg to .img, and put int in temporary directory
     local dmgFile="$1"
