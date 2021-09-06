@@ -16,6 +16,9 @@ source check_prereqs.sh
 # directory utilities
 source dir_utils.sh
 
+# extract utilities
+source extract_utils.sh
+
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
 function extract_fonts {
@@ -30,10 +33,10 @@ function extract_fonts {
     local dmgFile="$1"
     local dmgBaseName="$(basename "${dmgFile%.*}")"
     local imgFile="$tempDir/$dmgBaseName.img"
-    dmg2img -i "$dmgFile" -o "$imgFile"
+    extract_dmg_to_img "$dmgFile" "$imgFile"
 
     # 4. extract .img to temporary directory
-    7z x "$imgFile" -O"$tempDir"
+    extract_img "$imgFile" "$tempDir"
 
     # 5. extract the .pkg file in the temporary directory
     find "$tempDir" -name "*.pkg" -exec 7z x -O"$tempDir" {} ";"
