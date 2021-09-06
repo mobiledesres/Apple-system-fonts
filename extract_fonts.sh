@@ -35,19 +35,10 @@ function extract_fonts {
     local imgFile="$tempDir/$dmgBaseName.img"
     extract_dmg_to_img "$dmgFile" "$imgFile"
 
-    # 4. extract .img to temporary directory
-    extract_img "$imgFile" "$tempDir"
+    # 4. extract fonts from the .img file
+    extract_fonts_from_img "$imgFile" "$extractDir"
 
-    # 5. extract the .pkg file in the temporary directory
-    find "$tempDir" -name "*.pkg" -exec 7z x -O"$tempDir" {} ";"
-
-    # 6. extract the "Payload~" file
-    find "$tempDir" -name "Payload~" -exec 7z x -O"$tempDir" {} ";"
-
-    # 7. move all .otf and .ttf files to target directory
-    find "$tempDir" -name "*.[ot]tf" -exec mv -v {} "$extractDir" ";"
-
-    # 8. clean up temporary directory
+    # 5. clean up temporary directory
     rm -rf "$tempDir"
 }
 
