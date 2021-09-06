@@ -43,4 +43,4 @@ make update
 to update all .dmg files in the repository.
 
 # See also
-* [SF Symbols](../SF-Symbols)
+* [SF Symbols](https://github.com/mobiledesres/SF-Symbols)
