@@ -28,7 +28,7 @@ function extract_fonts {
 
     # 3. convert .dmg to .img, and put int in temporary directory
     local dmgFile="$1"
-    local dmgBaseName="$(basename ""${dmgFile.%}"")"
+    local dmgBaseName="$(basename "${dmgFile%.*}")"
     local imgFile="$tempDir/$dmgBaseName.img"
     dmg2img -i "$dmgFile" -o "$imgFile"
 
