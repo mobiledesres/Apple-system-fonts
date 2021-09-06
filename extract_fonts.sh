@@ -10,11 +10,13 @@ fi
 dmgFile="$1"
 extractDir="$2"
 
+currDir="$(dirname "$0")"
+
 # check prerequisite packages
-source check_prereqs.sh
+source "$currDir/check_prereqs.sh"
 
 # extract utilities
-source extract_utils.sh
+source "$currDir/extract_utils.sh"
 
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
