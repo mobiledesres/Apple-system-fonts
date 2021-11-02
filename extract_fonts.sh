@@ -10,7 +10,7 @@ fi
 dmgFile="$1"
 extractDir="$2"
 
-currDir="$(dirname "$0")"
+currDir="$(dirname "${BASH_SOURCE[0]}")"
 
 # check prerequisite packages
 source "$currDir/check_prereqs.sh"
@@ -21,18 +21,19 @@ source "$currDir/extract_utils.sh"
 # extract fonts from a .dmg file
 # Usage: extract_fonts "$dmgFile" "$extractDir"
 function extract_fonts {
-    # 1. create extract directory for fonts
+    local dmgFile="$1"
     local extractDir="$2"
+
+    # 1. create extract directory for fonts
     mkdir -pv "$extractDir"
     if [[ $? -ne 0 ]]; then
         exit $ERROR_RW
     fi
 
     # 2. create temporary directory to extract files
-    local tempDir=$(mktemp -d)
+    local tempDir="$(mktemp -d)"
 
     # 3. convert .dmg to .img, and put int in temporary directory
-    local dmgFile="$1"
     local dmgBaseName="$(basename "${dmgFile%.*}")"
     local imgFile="$tempDir/$dmgBaseName.img"
     extract_dmg_to_img "$dmgFile" "$imgFile"
