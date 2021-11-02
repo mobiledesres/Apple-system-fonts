@@ -23,7 +23,9 @@ make split
 ```
 to generate the split .dmg files from the original .dmg file. This uses the `split` program.
 
-# Downloading .dmg files
+# .dmg files
+The .dmg files are Apple Disk Image files that contain the font files. They can be downloaded from https://developer.apple.com/fonts/.
+
 * To get all .dmg files containing the fonts, you may run:
     ```shell
     make
