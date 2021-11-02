@@ -32,8 +32,11 @@ to generate the split .dmg files from the original .dmg file. This uses the `spl
     1. First it tries to combine the split .dmg files given in the repository using `cat`.
     2. After combining the split .dmg files to generate the complete .dmg files, the program contacts Apple server to see if the files have been updated on their side.
         * If updated, then the newer .dmg files will be downloaded using `wget`. Then it uses `split` to update the split .dmg files.
-* To clean up, run:
+* To clean up the .dmg files, run:
     ```shell
     make clean
     ```
-    Both the complete and split .dmg files will be removed.
+* To clean up the split .dmg files, run:
+    ```shell
+    make rmsplit
+    ```

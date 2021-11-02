@@ -24,6 +24,10 @@ split: $(dmg_files)
 		split -b $(split_size) -d $$dmg_file $$dmg_file; \
 	done
 
+.PHONY: rmsplit
+rmsplit:
+	-rm -rfv $(split_files)
+
 .PHONY: clean
 clean:
-	-rm -rfv $(dmg_files) $(split_files)
+	-rm -rfv $(dmg_files)
