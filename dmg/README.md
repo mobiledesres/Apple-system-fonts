@@ -23,8 +23,8 @@ make split
 ```
 to generate the split .dmg files from the original .dmg file. This uses the `split` program.
 
-# Extracting .dmg files
-* To get all fonts, you may run (automatically update the .dmg files to the newest version):
+# Downloading .dmg files
+* To get all .dmg files containing the fonts, you may run:
     ```shell
     make
     ```
