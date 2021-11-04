@@ -8,7 +8,7 @@ all: $(dmg_files) split
 
 %.dmg: %.url
 # first try: concatenate split .dmg files
-	$(eval dmg_src := $(shell find -name "$@??"))
+	$(eval dmg_src := $(shell find -name "$@??" | sort))
 	if [ -n "$(dmg_src)" ] ; then \
 		cat $(dmg_src) > "$@" ; \
 	fi
